@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sweetest Link</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fce4ec; /* Light pink background */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary {
+            background-color: #ff69b4; /* Hot pink */
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #e0569a; /* Darker pink */
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container min-h-screen flex flex-col justify-center items-center">
+
+        <!-- Home Page -->
+        <div id="homePage" class="w-full text-center">
+            <h1 class="text-5xl font-extrabold text-pink-600 mb-2 rounded-lg p-4 bg-white shadow-lg">The Sweetest Link</h1>
+            <p class="text-2xl text-pink-500 font-semibold mb-8">Taste the joy, link the memories.</p> <!-- Slogan added here -->
+            <p class="text-xl text-gray-700 mb-12">Indulge in our delightful treats and charming keychains!</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Cinnabons Card -->
+                <div class="card item-card" data-item-id="cinnabons">
+                    <img src="https://placehold.co/400x300/FFD700/000000?text=Cinnabons" alt="Cinnabons" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-pink-500 mb-2">Cinnabons</h3>
+                        <p class="text-gray-600">Warm, gooey, and irresistibly sweet.</p>
+                    </div>
+                </div>
+
+                <!-- Rocky Road Mousse Card -->
+                <div class="card item-card" data-item-id="rocky-road-mousse">
+                    <img src="https://placehold.co/400x300/8B4513/FFFFFF?text=Rocky+Road+Mousse" alt="Rocky Road Mousse" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-pink-500 mb-2">Rocky Road Mousse</h3>
+                        <p class="text-gray-600">A rich, chocolatey dream with marshmallows and nuts.</p>
+                    </div>
+                </div>
+
+                <!-- Candy Skewers Card -->
+                <div class="card item-card" data-item-id="candy-skewers">
+                    <img src="https://placehold.co/400x300/FF69B4/FFFFFF?text=Candy+Skewers" alt="Candy Skewers" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-pink-500 mb-2">Candy Skewers</h3>
+                        <p class="text-gray-600">A colorful and fun assortment of your favorite candies.</p>
+                    </div>
+                </div>
+
+                <!-- Animal Crochet Keychains Card -->
+                <div class="card item-card" data-item-id="keychains">
+                    <img src="https://placehold.co/400x300/ADD8E6/000000?text=Crochet+Keychains" alt="Animal Crochet Keychains" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-pink-500 mb-2">Animal Crochet Keychains</h3>
+                        <p class="text-gray-600">Handmade, adorable companions for your keys.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item Detail Page (initially hidden) -->
+        <div id="itemDetailPage" class="hidden w-full max-w-2xl text-center bg-white p-8 rounded-xl shadow-lg">
+            <h2 id="detailItemName" class="text-4xl font-bold text-pink-600 mb-6"></h2>
+            <img id="detailItemImage" src="" alt="" class="w-3/4 h-64 object-cover mx-auto rounded-lg mb-6 shadow-md">
+            <p id="detailItemDescription" class="text-lg text-gray-700 mb-4"></p>
+            <p id="detailItemPrice" class="text-3xl font-extrabold text-pink-500 mb-8"></p>
+            <button id="backButton" class="btn-primary text-xl font-semibold">Back to Home</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Define the items with their details
+        const items = [
+            {
+                id: 'cinnabons',
+                name: 'Cinnabons',
+                price: 'R15',
+                description: 'Our signature Cinnabons are baked fresh daily, offering a warm, gooey, and irresistibly sweet treat with a generous swirl of cinnamon and cream cheese frosting. Perfect for a delightful snack or dessert!',
+                image_url: 'https://placehold.co/400x300/FFD700/000000?text=Cinnabons'
+            },
+            {
+                id: 'rocky-road-mousse',
+                name: 'Rocky Road Mousse',
+                price: 'R20',
+                description: 'Indulge in our rich and creamy Rocky Road Mousse. This decadent dessert features a smooth chocolate mousse base, generously mixed with fluffy marshmallows and crunchy nuts, creating a perfect balance of textures and flavors.',
+                image_url: 'https://placehold.co/400x300/8B4513/FFFFFF?text=Rocky+Road+Mousse'
+            },
+            {
+                id: 'candy-skewers',
+                name: 'Candy Skewers',
+                price: 'R12',
+                description: 'Brighten your day with our colorful and fun Candy Skewers! Each skewer is loaded with a delightful assortment of gummy candies, sour belts, and chewy treats, making it the perfect sweet and tangy snack for any occasion.',
+                image_url: 'https://placehold.co/400x300/FF69B4/FFFFFF?text=Candy+Skewers'
+            },
+            {
+                id: 'keychains',
+                name: 'Animal Crochet Keychains',
+                price: 'R15',
+                description: 'Add a touch of handmade charm to your keys with our adorable Animal Crochet Keychains. Each keychain is meticulously crafted with love, featuring cute animal designs that make for a unique and thoughtful gift or a charming accessory for yourself.',
+                image_url: 'https://placehold.co/400x300/ADD8E6/000000?text=Crochet+Keychains'
+            }
+        ];
+
+        // Get references to the main page elements
+        const homePage = document.getElementById('homePage');
+        const itemDetailPage = document.getElementById('itemDetailPage');
+        const detailItemName = document.getElementById('detailItemName');
+        const detailItemImage = document.getElementById('detailItemImage');
+        const detailItemDescription = document.getElementById('detailItemDescription');
+        const detailItemPrice = document.getElementById('detailItemPrice');
+        const backButton = document.getElementById('backButton');
+        const itemCards = document.querySelectorAll('.item-card');
+
+        /**
+         * Shows the specified page and hides others.
+         * @param {string} pageId - The ID of the page to show ('homePage' or 'itemDetailPage').
+         */
+        function showPage(pageId) {
+            if (pageId === 'homePage') {
+                homePage.classList.remove('hidden');
+                itemDetailPage.classList.add('hidden');
+            } else if (pageId === 'itemDetailPage') {
+                homePage.classList.add('hidden');
+                itemDetailPage.classList.remove('hidden');
+            }
+        }
+
+        /**
+         * Displays the details of a specific item on the item detail page.
+         * @param {object} item - The item object containing its details.
+         */
+        function displayItemDetails(item) {
+            detailItemName.textContent = item.name;
+            detailItemImage.src = item.image_url;
+            detailItemImage.alt = item.name;
+            detailItemDescription.textContent = item.description;
+            detailItemPrice.textContent = `Price: ${item.price}`;
+            showPage('itemDetailPage');
+        }
+
+        // Add event listeners to each item card
+        itemCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const itemId = card.dataset.itemId;
+                const selectedItem = items.find(item => item.id === itemId);
+                if (selectedItem) {
+                    displayItemDetails(selectedItem);
+                }
+            });
+        });
+
+        // Add event listener to the back button
+        backButton.addEventListener('click', () => {
+            showPage('homePage');
+        });
+
+        // Initially show the home page
+        showPage('homePage');
+    </script>
+</body>
+</html>
